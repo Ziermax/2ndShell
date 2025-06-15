@@ -14,13 +14,13 @@ pwd: pwd [-LPW]
 
     Exit Status:
     Returns 0 unless an invalid option is given or the current directory
-    cannot be read.
-*/
+    cannot be read.*/
 
-int	ft_pwd(char **argv, t_env **env)
+int	ft_pwd(char **argv, t_shell *shell)
 {
 	char	*cwd;
 	
+	(void)shell;
 	if (!argv || !*argv)
 		return (ft_printf(2, "pwd: bad argument\n"), 3);
 	++argv;

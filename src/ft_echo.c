@@ -22,12 +22,12 @@ int	is_newline_on(char **argv)
 	return (i);
 }
 
-int	ft_echo(char **argv, t_env **env)
+int	ft_echo(char **argv, t_shell *shell)
 {
 	int	nl_flag;
 	int	i;
 
-	(void)env;
+	(void)shell;
 	if (!argv || !*argv)
 		return (ft_printf(2, "echo: bad argument\n"), 3);
 	nl_flag = is_newline_on(++argv);

@@ -1,4 +1,20 @@
 #include "enviroment.h"
+/*
+export: export [-fn] [name[=value] ...] or export -p
+    Set export attribute for shell variables.
+
+    Marks each NAME for automatic export to the environment of subsequently
+    executed commands.  If VALUE is supplied, assign VALUE before exporting.
+
+    Options:
+      -f        refer to shell functions
+      -n        remove the export property from each NAME
+      -p        display a list of all exported variables and functions
+
+    An argument of `--' disables further option processing.
+
+    Exit Status:
+    Returns success unless an invalid option is given or NAME is invalid.*/
 
 static int	is_valid_identifier(char *str)
 {
@@ -62,7 +78,7 @@ static int	add_export(char *str, t_env **env)
 	return (0);
 }
 
-int	ft_export(char **argv, t_env **env)
+int	ft_export(char **argv, t_shell *shell)
 {
 	int	ret;
 	int	f_ret;
@@ -79,7 +95,7 @@ int	ft_export(char **argv, t_env **env)
 	f_ret = 0;
 	while (argv[i])
 	{
-		ret = add_export(argv[i], env);
+		ret = add_export(argv[i], &shell->env);
 		if (ret && !f_ret)
 			f_ret = ret;
 		++i;
