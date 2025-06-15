@@ -1,15 +1,15 @@
 #include "../inc/libft.h"
 
-int	is_newline_on(char **argc)
+int	is_newline_on(char **argv)
 {
 	char	*str;
 	int		i;
 	int		j;
 
 	i = 0;
-	while (argc[i])
+	while (argv[i])
 	{
-		str = argc[i];
+		str = argv[i];
 		j = 0;
 		if (str[j++] != '-')
 			break ;
@@ -22,20 +22,20 @@ int	is_newline_on(char **argc)
 	return (i);
 }
 
-int	ft_echo(char **argc, t_env **env)
+int	ft_echo(char **argv, t_env **env)
 {
 	int	nl_flag;
 	int	i;
 
 	(void)env;
-	if (!argc)
-		return (ft_printf(2, "echo: failed argument creation\n"), 3);
-	nl_flag = is_newline_on(++argc);
+	if (!argv || !*argv)
+		return (ft_printf(2, "echo: bad argument\n"), 3);
+	nl_flag = is_newline_on(++argv);
 	i = nl_flag;
-	while (argc[i])
+	while (argv[i])
 	{
-		ft_printf(1, "%s", argc[i]);
-		if (argc[i + 1])
+		ft_printf(1, "%s", argv[i]);
+		if (argv[i + 1])
 			ft_printf(1, " ");
 		++i;
 	}
