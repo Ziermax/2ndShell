@@ -12,7 +12,7 @@ CFLAGS	= -Wall -Werror -Wextra
 
 NAME	= minishell
 
-SRCS	= $(wildcard src/*.c)
+SRCS	= src/main.c
 
 HEAD	= include/pipex.h
 

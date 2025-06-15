@@ -6,20 +6,39 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/04/29 15:50:48 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/04/29 16:09:42 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/15 16:43:44 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include "../libft/libft.h"
+#include "../inc/struct.h"
 
-int	minishell(char *line)
+/*
+int	execute_builtin(t_cmd *command, t_shell *shell)
+{
+	if (echo)
+		return (ft_echo(command->argv, shell));
+}
+
+int	execute(t_cmd *command, t_shell *shell)
+{
+	char	**env;
+
+	if (is_buitlin(command->path))
+		execute_builtin(shell);
+	//env = generate_env(shell->env);
+	execve(command->argv, command->path, env);
+}*/
+
+int	minishell(char *line, t_shell *shell)
 {
 	//t_token		a_ti;
 	//t_command	oritos;
 	//t_execute	no_existe;
 	
+	(void)shell;
 	(void)line;
 	dprintf(2, "Tokenizing (seprar en palabras).\n");
 	//a_ti = tokenizar(line);
@@ -31,22 +50,30 @@ int	minishell(char *line)
 	return (/*EL NUMERO DEL EXIT STATUS*/ 0);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
+	t_shell	shell;
 	char	*line;
-	int		ex_status = 0;
 
-	while (1)
+	(void)argc;
+	(void)argv;
+	//init_shell(&shell);
+	shell.finished = 0;
+	shell.status = 2;
+	shell.envp = envp;
+	while (!shell.finished)
 	{
 		write(1, "Promting (write whatever): ", 27);
 		line = get_next_line(0);
 		if (!line)
 			continue ;
 		if (!ft_strncmp("exit", line, 4) || !ft_strncmp("adios" , line, 5))
-			return (free(line), ex_status);
+			return (free(line), shell.status);
 		dprintf(2, "Line reached is: \n%s\n", line);
 		dprintf(2, "Minishell process:\n\n");
-		ex_status = minishell(line);
+		shell.status = minishell(line, &shell);
 		free(line);
 	}
+	//destroy_shell(&shell);
+	return (shell.status);
 }
