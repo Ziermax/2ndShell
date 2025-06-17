@@ -78,6 +78,18 @@ static int	add_export(char *str, t_env **env)
 	return (0);
 }
 
+void	print_export(t_env *env)
+{
+	while (env)
+	{
+		ft_printf(1, "meclare -x %s", env->key);
+		if (env->value)
+			ft_printf(1, "=\"%s\"", env->value);
+		ft_printf(1, "\n");
+		env = env->next;
+	}
+}
+
 int	ft_export(char **argv, t_shell *shell)
 {
 	int	ret;
@@ -89,7 +101,9 @@ int	ft_export(char **argv, t_shell *shell)
 	++argv;
 	if (!ft_strncmp("--help", *argv, 8))
 		return (ft_printf(2, "export: no help provided\n"), 2); 
-	if (argv[0] && argv[0][0] == '-' && argv[0][1])
+	if (!argv[0])
+		return (print_export(shell->env), 0);
+	if (argv[0][0] == '-' && argv[0][1])
 		return (ft_printf(2, SHELL ": export is not accepting options today\n"), 2);
 	i = 0;
 	f_ret = 0;

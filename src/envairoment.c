@@ -44,29 +44,54 @@ void	erase_key(char *key, t_env **list)
 	free(aux);
 }
 
-t_env	*find_key(char *key, t_env *list)
+t_env	*find_key(char *key, t_env *env)
 {
 	int	len;
 
 	if (!key)
 		return (NULL);
 	len = ft_strlen(key);
-	while (list)
+	while (env)
 	{
-		if (!ft_strncmp(key, list->key, len))
-			return (list);
-		list = list->next;
+		if (!ft_strncmp(key, env->key, len))
+			return (env);
+		env = env->next;
 	}
 	return (NULL);
 }
 
-t_env	*change_value(char *key, char *value, t_env *list)
+char	*find_value(char *key, t_env *env)
+{
+	env = find_key(key, env);
+	if (!env)
+		return (NULL);
+	return (env->value);
+}
+
+int	copy_value(char *key, char **value_box, t_env *env)
+{
+	char	*value;
+
+	if (!key || !value_box || !env)
+		return (-1);
+	*value_box = NULL;
+	value = find_value(key, env);
+	if (!value)
+		return (0);
+	value = ft_strcpy(value);
+	if (!value)
+		return (-1);
+	*value_box = value;
+	return (0);
+}
+
+t_env	*change_value(char *key, char *value, t_env *env)
 {
 	t_env	*aux;
 
 	if (!key)
 		return (NULL);
-	aux = find_key(key, list);
+	aux = find_key(key, env);
 	if (!aux)
 		return (NULL);
 	free(aux->value);
