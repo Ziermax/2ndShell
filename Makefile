@@ -13,6 +13,11 @@ CFLAGS	= -Wall -Werror -Wextra
 NAME	= minishell
 
 SRCS	= src/main.c
+SRCS	+= src/envairoment.c src/builtins.c \
+		   src/built-in/ft_cd.c src/built-in/ft_export.c \
+		   src/built-in/ft_echo.c src/built-in/ft_pwd.c \
+		   src/built-in/ft_env.c src/built-in/ft_unset.c \
+		   src/built-in/ft_exit.c
 
 HEAD	= include/pipex.h
 
