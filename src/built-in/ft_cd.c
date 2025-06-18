@@ -1,7 +1,8 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-#include "../inc/struct.h"
+#include "../../inc/libft.h"
+#include "../../inc/envairoment.h"
 /*
 cd: cd [-L|[-P [-e]] [-@]] [dir]
     Change the shell working directory.
@@ -44,13 +45,13 @@ int	change_directory(char *dir, t_env **list)
 	char	*oldpwd;
 
 	if (copy_value("OLDPWD", &oldpwd, *list) == -1)
-		return (ft_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
+		return (fd_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
 	if (copy_value("PWD", &pwd, *list) == -1)
 		return (free(oldpwd),
-				ft_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
-	if (chdir(argv[0]) == -1)
+				fd_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
+	if (chdir(dir) == -1)
 		return (free(oldpwd), free(pwd),
-				ft_printf(2, "cd: %s: %s\n", argv[0], strerror(errno)), 1);
+				fd_printf(2, "cd: %s: %s\n", dir, strerror(errno)), 1);
 	if (!change_value("OLDPWD", oldpwd, *list))
 		free(oldpwd);
 	if (!change_value("PWD", pwd, *list))
@@ -61,16 +62,16 @@ int	change_directory(char *dir, t_env **list)
 int	ft_cd(char **argv, t_shell *shell)
 {
 	if (!argv || !*argv)
-		return (ft_printf(2, "cd: bad argument\n"), 3);
+		return (fd_printf(2, "cd: bad argument\n"), 3);
 	++argv;
 	if (!ft_strncmp("--help", *argv, 8))
-		return (ft_printf(2, "cd: no help provided\n"), 2); 
+		return (fd_printf(2, "cd: no help provided\n"), 2); 
 	if (!argv[0])
-		return (ft_printf(2, "cd: argument needed"), 2);
+		return (fd_printf(2, "cd: argument needed"), 2);
 	if (argv[0][0] == '-' && argv[0][1])
-		return (ft_printf(2, SHELL ": cd is not accepting options today\n"), 2);
+		return (fd_printf(2, SHELL ": cd is not accepting options today\n"), 2);
 	if (argv[0] && argv[1])
-		return (ft_printf(2, SHELL ":cd: too many arguments\n"), 1);
-	change_directory(argv[0]);
+		return (fd_printf(2, SHELL ":cd: too many arguments\n"), 1);
+	change_directory(argv[0], &shell->env);
 	return (0);
 }

@@ -1,4 +1,5 @@
-#include "../inc/libft.h"
+#include "../../inc/libft.h"
+#include "../../inc/envairoment.h"
 
 int	is_newline_on(char **argv)
 {
@@ -29,17 +30,17 @@ int	ft_echo(char **argv, t_shell *shell)
 
 	(void)shell;
 	if (!argv || !*argv)
-		return (ft_printf(2, "echo: bad argument\n"), 3);
+		return (fd_printf(2, "echo: bad argument\n"), 3);
 	nl_flag = is_newline_on(++argv);
 	i = nl_flag;
 	while (argv[i])
 	{
-		ft_printf(1, "%s", argv[i]);
+		fd_printf(1, "%s", argv[i]);
 		if (argv[i + 1])
-			ft_printf(1, " ");
+			fd_printf(1, " ");
 		++i;
 	}
 	if (nl_flag)
-		ft_printf(1, "\n");
+		fd_printf(1, "\n");
 	return (0);
 }

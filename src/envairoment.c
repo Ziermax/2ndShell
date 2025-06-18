@@ -17,6 +17,22 @@ void	delete_env(t_env *env)
 	free(env->value);
 }
 
+t_env	*find_key(char *key, t_env *env)
+{
+	int	len;
+
+	if (!key)
+		return (NULL);
+	len = ft_strlen(key);
+	while (env)
+	{
+		if (!ft_strncmp(key, env->key, len))
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
+
 void	erase_key(char *key, t_env **list)
 {
 	t_env	*aux;
@@ -44,22 +60,6 @@ void	erase_key(char *key, t_env **list)
 	free(aux);
 }
 
-t_env	*find_key(char *key, t_env *env)
-{
-	int	len;
-
-	if (!key)
-		return (NULL);
-	len = ft_strlen(key);
-	while (env)
-	{
-		if (!ft_strncmp(key, env->key, len))
-			return (env);
-		env = env->next;
-	}
-	return (NULL);
-}
-
 char	*find_value(char *key, t_env *env)
 {
 	env = find_key(key, env);
@@ -78,7 +78,7 @@ int	copy_value(char *key, char **value_box, t_env *env)
 	value = find_value(key, env);
 	if (!value)
 		return (0);
-	value = ft_strcpy(value);
+	value = ft_strdup(value);
 	if (!value)
 		return (-1);
 	*value_box = value;
@@ -106,7 +106,7 @@ t_env	*add_value(char *key, char *value, t_env **list)
 
 	if (!list || !key)
 		return (NULL);
-	aux = change_value(key, value, list);
+	aux = change_value(key, value, *list);
 	if (aux)
 		return (free(key), aux);
 	tmp = malloc(sizeof(t_env));
@@ -131,7 +131,7 @@ t_env	*expand_value(char *key, char *append, t_env **list)
 
 	if (!key)
 		return (NULL);
-	aux = find_key(key, list);
+	aux = find_key(key, *list);
 	if (!aux)
 		return (add_value(key, append, list));
 	tmp = ft_strjoin(aux->value, append);

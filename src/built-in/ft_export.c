@@ -1,4 +1,7 @@
-#include "enviroment.h"
+#include <string.h>
+#include <errno.h>
+#include "../../inc/libft.h"
+#include "../../inc/envairoment.h"
 /*
 export: export [-fn] [name[=value] ...] or export -p
     Set export attribute for shell variables.
@@ -21,7 +24,7 @@ static int	is_valid_identifier(char *str)
 	int	i;
 
 	i = 0;
-	if (ft_isnum(str[i]) || str[i] == '=')
+	if (ft_isdigit(str[i]) || str[i] == '=')
 		return (0);
 	while (str[i] && str[i] != '=')
 	{
@@ -64,17 +67,17 @@ static int	add_export(char *str, t_env **env)
 	char	*value;
 
 	if (!is_valid_identifier(str))
-		return (ft_printf(2, "export: `%s': not a valid identifier\n", str), 1);
+		return (fd_printf(2, "export: `%s': not a valid identifier\n", str), 1);
 	if (get_key_value(str, &key, &value))
-		return (ft_printf(2, "export: %s\n", strerror(errno)), 3);
-	equal = ft_strchar(str, '=');
+		return (fd_printf(2, "export: %s\n", strerror(errno)), 3);
+	equal = ft_strchr(str, '=');
 	if (equal && *(equal - 1) == '+')
 		aux = expand_value(key, value, env);
 	else
 		aux = add_value(key, value, env);
 	if (!aux)
 		return (free(key), free(value),
-				ft_printf(2, "export: %s\n", strerror(errno)) 3);
+				fd_printf(2, "export: %s\n", strerror(errno)), 3);
 	return (0);
 }
 
@@ -82,10 +85,10 @@ void	print_export(t_env *env)
 {
 	while (env)
 	{
-		ft_printf(1, "meclare -x %s", env->key);
+		fd_printf(1, "meclare -x %s", env->key);
 		if (env->value)
-			ft_printf(1, "=\"%s\"", env->value);
-		ft_printf(1, "\n");
+			fd_printf(1, "=\"%s\"", env->value);
+		fd_printf(1, "\n");
 		env = env->next;
 	}
 }
@@ -97,14 +100,14 @@ int	ft_export(char **argv, t_shell *shell)
 	int	i;
 
 	if (!argv || !*argv)
-		return (ft_printf(2, "export: bad argument\n"), 3);
+		return (fd_printf(2, "export: bad argument\n"), 3);
 	++argv;
 	if (!ft_strncmp("--help", *argv, 8))
-		return (ft_printf(2, "export: no help provided\n"), 2); 
+		return (fd_printf(2, "export: no help provided\n"), 2); 
 	if (!argv[0])
 		return (print_export(shell->env), 0);
 	if (argv[0][0] == '-' && argv[0][1])
-		return (ft_printf(2, SHELL ": export is not accepting options today\n"), 2);
+		return (fd_printf(2, SHELL ": export is not accepting options today\n"), 2);
 	i = 0;
 	f_ret = 0;
 	while (argv[i])

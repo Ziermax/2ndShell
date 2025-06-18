@@ -1,5 +1,5 @@
-#include "../inc/envairoment.h" 
-#include "../inc/libft.h"
+#include "../../inc/envairoment.h" 
+#include "../../inc/libft.h"
 /*
 Usage: env [OPTION]... [-] [NAME=VALUE]... [COMMAND [ARG]...]
 Set each NAME to VALUE in the environment and run COMMAND.
@@ -30,24 +30,24 @@ Report any translation bugs to <https://translationproject.org/team/>
 Full documentation <https://www.gnu.org/software/coreutils/env>
 or available locally via: info '(coreutils) env invocation'*/
 
-void	print_env(t_env	*env)
+static void	print_env_aux(t_env	*env)
 {
 	while (env)
 	{
 		if (env->value)
-			ft_printf(1, "%s=%sn", env->key, env->value);
+			fd_printf(1, "%s=%sn", env->key, env->value);
 		env = env->next;
 	}
 }
 
 int	ft_env(char **argv, t_shell *shell)
 {
-	if (!argv || !env)
+	if (!argv || !shell)
 		return (2);
 	if (!argv[1])
-		return (print_env(shell->env), 0);
+		return (print_env_aux(shell->env), 0);
 	if (argv[1][0] == '-')
-		return (ft_printf(2, SHELL ": env is not accepting options today\n"), 125);
-	ft_printf(2, "env: '%s': We are not launching another program pal\n");
+		return (fd_printf(2, SHELL ": env is not accepting options today\n"), 125);
+	fd_printf(2, "env: '%s': We are not launching another program pal\n");
 	return (127);
 }
