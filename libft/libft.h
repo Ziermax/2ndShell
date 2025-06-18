@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*  libft.h                                              :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*   Updated: 2024/08/15 17:08:35 by gergarci         ###   ########.fr       */
+/*  Updated: 2025/06/18 23:36:22 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef struct s_list
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
-int		ft_isascii(int c);
+//int		ft_isascii(int c); Is is necesary?
+int		ft_isspace(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
@@ -85,11 +86,23 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //Extras
 char	*get_next_line(int fd);
 int		ft_printf(const char *str, ...);
+int		fd_printf(int fd, const char *str, ...);
 void	ft_write_pstr(char *c, int len, int *ch_print);
 void	ft_print_char(char c, int *ch_print);
 void	ft_print_string(char *str, int *ch_print);
 int		ft_print_num(long num_in, int *ch_print, int is_uni);
 int		ft_print_hex(unsigned int num_in, int *ch_print, int is_low);
 int		ft_print_ptr(unsigned long num_in, int *ch_print);
+
+//Extras Maxi
+	//List needs that 'next' var is the first element of struct
+void	lst_add_back(void *list, void *node);
+void	lst_add_front(void *list, void *node);
+void	lst_clear(void *list, void (*del)(void *));
+void	lst_for_each(void *list, void (*func)(void *));
+	//array
+void	free_array(void **array);
+char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *));
+char	*no_skip(char *str);
 
 #endif
