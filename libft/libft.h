@@ -6,7 +6,7 @@
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*  Updated: 2025/06/18 23:36:22 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 00:32:03 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //Extras
 char	*get_next_line(int fd);
 int		ft_printf(const char *str, ...);
-int		fd_printf(int fd, const char *str, ...);
 void	ft_write_pstr(char *c, int len, int *ch_print);
 void	ft_print_char(char c, int *ch_print);
 void	ft_print_string(char *str, int *ch_print);
@@ -95,12 +94,19 @@ int		ft_print_hex(unsigned int num_in, int *ch_print, int is_low);
 int		ft_print_ptr(unsigned long num_in, int *ch_print);
 
 //Extras Maxi
+int		fd_printf(int fd, const char *str, ...);
+	//joins
+char	*ft_threejoin(char *str1, char *str2, char *str3);
+char	*ft_splitjoin(char	**split);
+char	*ft_multiplejoin(int num, ...);
 	//List needs that 'next' var is the first element of struct
 void	lst_add_back(void *list, void *node);
 void	lst_add_front(void *list, void *node);
 void	lst_clear(void *list, void (*del)(void *));
 void	lst_for_each(void *list, void (*func)(void *));
 	//array
+int		ft_arraylen(void *array);
+void	*add_dir(void *array, void *dir);
 void	free_array(void **array);
 char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *));
 char	*no_skip(char *str);

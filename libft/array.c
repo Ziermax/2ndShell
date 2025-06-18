@@ -1,90 +1,42 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                         :::      ::::::::  */
-/*  array.c                                              :+:      :+:    :+:  */
-/*                                                     +:+ +:+         +:+    */
-/*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
-/*                                                 +#+#+#+#+#+   +#+          */
-/*  Created: 2025/06/18 23:09:02 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/18 23:12:26 by mvelazqu           ###   ########.fr      */
-/*                                                                            */
-/* ************************************************************************** */
+#include <stdlib.h>
+#include "libft.h"
 
-void	free_array(void **array)
+int	ft_arraylen(void *array)
 {
-	int	i;
+	void	**aux;
+	int		len;
 
 	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
+		return (0);
+	aux = array;
+	len = 0;
+	while (aux[len])
+		++len;
+	return (len);
 }
 
-static int	count_words(
-		char *str,
-		char *(*skip_separator)(char *),
-		char *(*next_word)(char *)
-		) {
-	int	words;
-
-	words = 0;
-	while (*str)
-	{
-		str = skip_separator(str);
-		if (!*str)
-			return (words);
-		words++;
-		str = next_word(str);
-	}
-	return (words);
-}
-
-static char	*get_word(
-		char **str,
-		char *(*skip_separator)(char *),
-		char *(*next_word)(char *)
-		) {
-	char	*word;
-	char	*aux;
+void	*add_dir(void *array, void *dir)
+{
+	void	**new_array;
+	void	**old_array;
 	int		len;
 	int		i;
 
-	*str = skip_separator(*str);
-	aux = next_word(*str);
-	len = aux - *str;
-	word = malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
-	aux = *str;
+	if (!dir)
+		return (array);
+	old_array = array;
+	len = ft_arraylen(old_array);
+	new_array = malloc(sizeof(void *) * (len + 2));
+	if (!new_array)
+		return (free_array(array), NULL);
 	i = 0;
 	while (i < len)
-		word[i++] = *aux++;
-	word[i] = '\0';
-	*str = aux;
-	return (word);
-}
-
-char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *))
-{
-	char	**split;
-	int		words;
-	int		i;
-
-	if (!str)
-		return (NULL);
-	words = count_words(str, skip, next);
-	split = malloc(sizeof(char *) * (words + 1));
-	if (!split)
-		return (NULL);
-	i = 0;
-	while (i < words)
 	{
-		split[i] = get_word(&str, skip, next);
-		if (!split[i++])
-			return (free_split(split), NULL);
+		new_array[i] = old_array[i];
+		i++;
 	}
-	split[i] = NULL;
-	return (split);
+	new_array[i] = dir;
+	new_array[i + 1] = NULL;
+	free(old_array);
+	return (new_array);
 }
