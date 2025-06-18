@@ -6,7 +6,7 @@
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*  Updated: 2025/06/19 01:12:15 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 01:20:10 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
+# define START 0
+# define END 2147483647
 
 typedef struct s_list
 {

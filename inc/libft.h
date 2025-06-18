@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*  libft.h                                              :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*   Updated: 2024/08/15 17:08:35 by gergarci         ###   ########.fr       */
+/*  Updated: 2025/06/19 01:20:10 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# define START 0
+# define END 2147483647
+
 typedef struct s_list
 {
 	void			*content;
@@ -37,7 +40,8 @@ typedef struct s_list
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
-int		ft_isascii(int c);
+//int		ft_isascii(int c); Is is necesary?
+int		ft_isspace(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
@@ -48,6 +52,7 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int		ft_strfcat(char	*dst, char *src, int dstsize, int from);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -60,7 +65,7 @@ char	*ft_strdup(const char *s1);
 
 //Part 2
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
@@ -91,5 +96,24 @@ void	ft_print_string(char *str, int *ch_print);
 int		ft_print_num(long num_in, int *ch_print, int is_uni);
 int		ft_print_hex(unsigned int num_in, int *ch_print, int is_low);
 int		ft_print_ptr(unsigned long num_in, int *ch_print);
+
+//Extras Maxi
+int		fd_printf(int fd, const char *str, ...);
+	//joins
+char	*ft_threejoin(char *str1, char *str2, char *str3);
+char	*ft_splitjoin(char	**split);
+char	*ft_multiplejoin(int num, ...);
+	//List needs that 'next' var is the first element of struct
+void	lst_add_back(void *list, void *node);
+void	lst_add_front(void *list, void *node);
+void	lst_clear(void *list, void (*del)(void *));
+void	lst_for_each(void *list, void (*func)(void *));
+	//array
+int		ft_arraylen(void *array);
+void	*add_dir(void *array, void *dir);
+void	free_array(void **array);
+char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *));
+char	*no_skip(char *str);
+char	*skip_space(char *str);
 
 #endif
