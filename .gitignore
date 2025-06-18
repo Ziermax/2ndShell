@@ -7,3 +7,4 @@ test*
 minishell
 *.o
 *.d
+*.a
