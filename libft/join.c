@@ -68,7 +68,7 @@ char	*ft_splitjoin(char	**split)
 
 	if (!split)
 		return (NULL);
-	len = ft_splitlen(split);
+	len = ft_arraylen(split);
 	join = malloc(sizeof(char *) * (len + 1));
 	if (!join)
 		return (NULL);
@@ -101,4 +101,16 @@ char	*ft_multiplejoin(int num, ...)
 	join = ft_splitjoin(multiple);
 	free(multiple);
 	return (join);
+}
+
+int	ft_strfcat(char	*dst, char *src, int dstsize, int from)
+{
+	if (!dst || !src || !dstsize || from < 0)
+		return (dstsize);
+	if (from >= dstsize)
+		return (dstsize);
+	while (*src && from < dstsize)
+		dst[from++] = *(src++);
+	dst[from] = '\0';
+	return (ft_strlen(src) + from);
 }
