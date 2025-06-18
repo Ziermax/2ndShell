@@ -1,0 +1,9 @@
+*.swp
+*.swo
+*.out
+test*
+.*
+*.txt
+minishell
+*.o
+*.d
