@@ -71,7 +71,7 @@ int	ft_cd(char **argv, t_shell *shell)
 	if (argv[0][0] == '-' && argv[0][1])
 		return (fd_printf(2, SHELL ": cd is not accepting options today\n"), 2);
 	if (argv[0] && argv[1])
-		return (ft_perro(SHELL ":cd: too many arguments", NULL), 1);
+		return (ft_perro(SHELL ": cd: too many arguments", NULL), 1);
 	change_directory(argv[0], &shell->env);
 	return (0);
 }

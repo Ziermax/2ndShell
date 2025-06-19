@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:24:17 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 18:14:02 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 21:51:48 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_exit(char **argv, t_shell *shell)
 		return (fd_printf(2, SHELL ": exit: %s: numeric argument required\n",
 				argv[0]), 2);
 	if (argv[1])
-		return (fd_printf(2, SHELL ":exit: too many arguments\n"),
+		return (fd_printf(2, SHELL ": exit: too many arguments\n"),
 			shell->finished = 0, 1);
 	return (status);
 }
