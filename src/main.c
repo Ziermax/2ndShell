@@ -34,20 +34,26 @@ int	execute(t_cmd *command, t_shell *shell)
 
 int	minishell(char *line, t_shell *shell)
 {
-	//t_token		a_ti;
-	//t_command	oritos;
-	//t_execute	no_existe;
+	t_token		*tokens;
+	t_command	*cmd;
 	
-	(void)shell;
-	(void)line;
-	dprintf(2, "Tokenizing (seprar en palabras).\n");
-	//a_ti = tokenizar(line);
-	dprintf(2, "Commanding (Pasar de palabras a algo mejor).\n");
-	//oritos = commanding(a_ti);
-	dprintf(2, "Executting (Ejecutar esa estructura de comandos).\n");
-	//no_existe = executing(oritos);
-	dprintf(2, "Retturning last exit status.\n\n");
-	return (/*EL NUMERO DEL EXIT STATUS*/ 0);
+	//dprintf(2, "Tokenizing (seprar en palabras).\n");
+	ft_token(line, &tokens ,&shell->status);
+	if (!tokens || shell->status != 0)
+        return (shell->status);
+	//dprintf(2, "Commanding (Pasar de palabras a algo mejor).\n");
+	cmd = ft_parse_commands(tokens);
+	if (!cmd)
+    {
+        ft_free_tokenlist(&tokens);
+        return (1);
+    }
+	//dprintf(2, "Executting (Ejecutar esa estructura de comandos).\n");
+	shell->status = ft_execute(cmd,shell);
+	//dprintf(2, "Retturning last exit status.\n\n");
+	ft_free_tokenlist(&tokens);
+    ft_free_commandlist(&cmd);
+    return (shell->status);
 }
 
 int	main(int argc, char **argv, char **envp)
