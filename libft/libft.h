@@ -6,7 +6,7 @@
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*  Updated: 2025/06/19 01:20:10 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 02:59:05 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	lst_for_each(void *list, void (*func)(void *));
 	//array
 int		ft_arraylen(void *array);
 void	*add_dir(void *array, void *dir);
+void	*add_array(void *array, void *to_add);
 void	free_array(void **array);
 char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *));
 char	*no_skip(char *str);
