@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoas+trim.c                                   :+:      :+:    :+:   */
+/*  ft_itoas+trim.c                                      :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gergarci <gergarci@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:58:50 by gergarci          #+#    #+#             */
-/*   Updated: 2024/01/26 20:23:51 by gergarci         ###   ########.fr       */
+/*  Updated: 2025/06/19 05:10:51 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,29 @@ int	ft_atoi(const char *str)
 		}
 		return (num * neg);
 	}
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*trim;
+	int		first;
+	int		last;
+	int		i;
+
+	if (!s1 || !set)
+		return (NULL);
+	i = 0;
+	first = 0;
+	last = ft_strlen(s1);
+	while (s1[first] && ft_strchr(set, s1[first]))
+		first++;
+	while (last > first && ft_strchr(set, s1[last - 1]))
+		last--;
+	trim = malloc(sizeof(char) * (last - first + 1));
+	if (!trim)
+		return (NULL);
+	while (first < last)
+		trim[i++] = s1[first++];
+	trim[i] = '\0';
+	return (trim);
 }

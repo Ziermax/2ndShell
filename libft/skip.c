@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/18 23:13:11 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 00:45:39 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 05:08:38 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*no_skip(char *str)
 {
-	return (*str);
+	return (str);
 }
 
 char	*skip_space(char *str)
