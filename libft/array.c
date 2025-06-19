@@ -67,3 +67,31 @@ void	*add_array(void *array, void *to_add)
 	new_array[len1 + len2] = NULL;
 	return (free(array), free(to_add), new_array);
 }
+
+void	*add_array_to_array(void *array, void *to_add, void *position)
+{
+	void	**new_array;
+	int		len[2];
+	int		idx[3];
+
+	if (!to_add)
+		return (array);
+	len[0] = ft_arraylen(array);
+	len[1] = ft_arraylen(to_add);
+	new_array = malloc(sizeof(void *) * (len[0] + len[1] + 1));
+	if (!new_array)
+		return (free_array(array), NULL);
+	ft_bzero(idx, sizeof(int) * 3);
+	while (J[idx] < len[0])
+	{
+		new_array[I[idx]++] = ((void **)array)[J[idx]];
+		if (((void **)array)[J[idx]++] == position)
+			break ;
+	}
+	while (K[idx] < len[1])
+		new_array[I[idx]++] = ((void **)to_add)[K[idx]++];
+	while (J[idx] < len[0])
+		new_array[I[idx]++] = ((void **)array)[J[idx]++];
+	new_array[I[idx]] = NULL;
+	return (free(array), new_array);
+}

@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/04/29 15:50:48 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 15:08:27 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 21:20:35 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,26 @@ int	execute(t_cmd *command, t_shell *shell)
 
 int	minishell(char *line, t_shell *shell)
 {
-	(void)shell;
+	int		(*built)(char **, t_shell *);
+	char	**argv;
+	char	**expanded;
+	int		ret;
 
 	fd_printf(1, "This is the line: %s\n", line);
-	return (/*EL NUMERO DEL EXIT STATUS*/ 0);
+	argv = ultra_split(line, skip_space, next_simple);
+	expanded = expand_array(argv, shell);
+	if (!expanded)
+		return (-1);
+	argv = expanded;
+	if (!argv)
+		return (-1);
+	built = is_built(argv[0]);
+	if (!built)
+		return (1);
+	ret = built(argv, shell);
+	printf("Retorno de Built: %d\n", ret);
+	free(argv);
+	return (ret);
 }
 
 static void	read_shell(t_shell *shell)
@@ -67,8 +83,6 @@ int	main(int argc, char **argv, char **envp)
 	t_shell	shell;
 
 	(void)argv;
-	(void)argc;
-	//envp = argv;
 	if (argc != 1)
 		return (ft_perro(SHELL " isn't accepting arguments pal", NULL), 3);
 	if (init_shell(&shell, envp) == -1)

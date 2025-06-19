@@ -6,7 +6,7 @@
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*  Updated: 2025/06/19 11:52:46 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 21:01:39 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 
 # define START 0
 # define END 2147483647
+# define I 0
+# define J 1
+# define K 2
+# define NOT_SEEN -1
+# define STR_START 1
+# define STR_MIDDLE 2
+# define STR_END 4
 
 typedef struct s_list
 {
@@ -115,9 +122,23 @@ int		ft_split_charlen(char **split);
 int		ft_arraylen(void *array);
 void	*add_dir(void *array, void *dir);
 void	*add_array(void *array, void *to_add);
+void	*add_array_to_array(void *array, void *to_add, void *position);
 void	free_array(void *array);
+	//search
+char	*search_word_in_split(char *word, char **split, int bytes);
+char	*search_word_in_str(char *word, char *str, int bytes);
+char	*search_word_in_start(char *word, char *str, int bytes);
+char	*search_word_in_middle(char *word, char *str, int bytes);
+char	*search_word_in_end(char *word, char *str);
+	//split
 char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *));
 char	*no_skip(char *str);
 char	*skip_space(char *str);
+char	*next_simple(char *str);
+char	**split_for_each(char **split, char *(*fun)(char *));
+char	**split_for_each_aux(char **split, void *aux,
+		char *(*fun)(char *, void *));
+char	**ultra_split_for_each_aux(char **split, void *aux,
+		char **(*fun)(char *, void *));
 
 #endif

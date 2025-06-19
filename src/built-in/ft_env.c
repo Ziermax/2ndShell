@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:24:24 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 02:24:26 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 20:11:20 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	print_env_aux(t_env	*env)
 	while (env)
 	{
 		if (env->value)
-			fd_printf(1, "%s=%sn", env->key, env->value);
+			fd_printf(1, "%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
 }
@@ -56,11 +56,12 @@ int	ft_env(char **argv, t_shell *shell)
 {
 	if (!argv || !shell)
 		return (2);
-	if (!argv[1])
+	++argv;
+	if (!argv[0])
 		return (print_env_aux(shell->env), 0);
-	if (argv[1][0] == '-')
+	if (argv[0][0] == '-')
 		return (fd_printf(2, SHELL ": env is not accepting options today\n"),
-			125);
-	fd_printf(2, "env: '%s': We are not launching another program pal\n");
-	return (127);
+			3);
+	fd_printf(2, "env: '%s': We are not launching another program pal\n", *argv);
+	return (3);
 }

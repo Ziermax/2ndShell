@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:25:36 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 02:25:37 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 21:25:54 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static int	is_valid_identifier(char *str)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(str[i]) || str[i] == '=')
+	if (ft_isdigit(str[0]) || str[0] == '=')
 		return (0);
 	while (str[i] && str[i] != '=')
 	{
-		if (!ft_isalnum(str[i]) || str[i] != '_')
-			return (0);
 		if (str[i] == '+' && str[i + 1] == '=')
-			continue ;
+			break ;
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
 		++i;
 	}
 	return (1);
@@ -55,7 +55,7 @@ static int	get_key_value(char *str, char **key, char **value)
 
 	equal = ft_strchr(str, '=');
 	if (equal)
-		*key = ft_substr(str, START, equal - str);
+		*key = ft_substr(str, START, equal - str - 1);
 	else
 		*key = ft_strdup(str);
 	if (!*key)

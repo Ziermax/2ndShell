@@ -58,7 +58,7 @@ void	erase_key(char *key, t_env **list)
 		*list = NULL;
 		return ;
 	}
-	while (prev->next && prev != aux)
+	while (prev->next && prev->next != aux)
 		prev = prev->next;
 	if (!prev->next)
 		return ;
@@ -67,8 +67,10 @@ void	erase_key(char *key, t_env **list)
 	free(aux);
 }
 
+#include <stdio.h>
 char	*find_value(char *key, t_env *env)
 {
+
 	env = find_key(key, env);
 	if (!env)
 		return (NULL);
@@ -79,9 +81,11 @@ int	copy_value(char *key, char **value_box, t_env *env)
 {
 	char	*value;
 
-	if (!key || !value_box || !env)
+	if (!key || !value_box)
 		return (-1);
 	*value_box = NULL;
+	if (!env)
+		return (0);
 	value = find_value(key, env);
 	if (!value)
 		return (0);
@@ -125,12 +129,9 @@ t_env	*add_value(char *key, char *value, t_env **list)
 	aux = *list;
 	if (!aux)
 		return (*list = tmp);
-	print_env(aux);
 	while (aux->next)
 		aux = aux->next;
 	aux->next = tmp;
-	print_env(aux);
-	print_env(tmp);
 	return (tmp);
 }
 
@@ -160,16 +161,15 @@ t_env	*create_list(char **envp)
 	char	*key;
 	char	*value;
 	int		i;
-	t_env	*aux;
 
 	i = 0;
+	env = NULL;
 	while (envp[i])
 	{
 		if (ft_split_in_two(envp[i], '=', &key, &value) == -1)
 			return (lst_clear(&env, delete_env), NULL);
-		if ((aux = add_value(key, value, &env)) == NULL)
+		if (add_value(key, value, &env) == NULL)
 			return (free(key), free(value), lst_clear(&env, delete_env), NULL);
-		print_env(aux);
 		++i;
 	}
 	return (env);

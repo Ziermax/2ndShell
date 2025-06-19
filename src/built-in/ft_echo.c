@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:24:29 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 02:24:31 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 17:24:10 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_echo(char **argv, t_shell *shell)
 			fd_printf(1, " ");
 		++i;
 	}
-	if (nl_flag)
+	if (!nl_flag)
 		fd_printf(1, "\n");
 	return (0);
 }

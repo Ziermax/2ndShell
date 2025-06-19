@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_finder+comp.c                               :+:      :+:    :+:   */
+/*  ft_str_finder+comp.c                                 :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:58:50 by gergarci          #+#    #+#             */
-/*   Updated: 2024/08/05 19:21:35 by gergarci         ###   ########.fr       */
+/*  Updated: 2025/06/19 16:41:53 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned char	*s1temp;
 	unsigned char	*s2temp;
 
-	if (s1 == NULL || s2 == NULL || n <= 0)
+	if (n <= 0)
 		return (0);
+	if (s1 == NULL || s2 == NULL)
+		return ((int)(s1 - s2));
 	s1temp = (unsigned char *) s1;
 	s2temp = (unsigned char *) s2;
 	i = 0;

@@ -13,8 +13,12 @@ CFLAGS	= -Wall -Werror -Wextra
 NAME	= minishell
 
 SRCS	= src/main.c
+#		   src/expansion/expansion.c src/expansion/expansion_next.c
+
 SRCS	+= src/envairoment.c src/ft_builtins.c \
-		   src/expansion/expansion.c src/expansion/expansion_next.c \
+		   src/expansion/expand.c src/expansion/expand_asterisk.c \
+		   src/expansion/expand_env.c src/expansion/expand_next.c \
+		   src/expansion/expand_slash.c src/expansion/expand_utils.c \
 		   src/built-in/ft_cd.c src/built-in/ft_export.c \
 		   src/built-in/ft_echo.c src/built-in/ft_pwd.c \
 		   src/built-in/ft_env.c src/built-in/ft_unset.c \

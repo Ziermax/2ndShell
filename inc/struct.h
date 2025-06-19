@@ -14,7 +14,6 @@ struct s_env
 
 typedef struct s_shell
 {
-	char	**envp;//Ah que quitarlo
 	t_env	*env;
 	int		status;
 	int		finished;

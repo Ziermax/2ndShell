@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:24:17 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 12:32:59 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 18:14:02 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@ static int	exit_number(char *str)
 	i = 0;
 	while (ft_isspace(str[i]))
 		++i;
-	sign = 0;
+	sign = 1;
 	if (str[i] == '-' || str[i] == '+')
 		if (str[i++] == '-')
-			sign = 1;
+			sign = -1;
 	num = 0;
 	while (ft_isdigit(str[i]))
 	{
-		num += str[i++] - '0';
-		if ((num > LONG_MAX && !sign)
-			|| (num > ((unsigned long)1 + LONG_MAX) && sign))
+		num =  num * 10 + str[i++] - '0';
+		if ((num > LONG_MAX && sign == 1)
+			|| (num > ((unsigned long)1 + LONG_MAX) && sign == -1))
 			break ;
 	}
 	while (ft_isspace(str[i]))
 		++i;
 	if (str[i])
 		return (-1);
-	return ((long)num * sign);
+	return ((unsigned char)(num * sign));
 }
 
 int	ft_exit(char **argv, t_shell *shell)

@@ -44,14 +44,14 @@ int	change_directory(char *dir, t_env **list)
 	char	*pwd;
 	char	*oldpwd;
 
-	if (copy_value("OLDPWD", &oldpwd, *list) == -1)
-		return (fd_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
-	if (copy_value("PWD", &pwd, *list) == -1)
-		return (free(oldpwd),
-			fd_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
+	if (copy_value("PWD", &oldpwd, *list) == -1)
+		return (fd_printf(2, "cd: setting OLDPWD: %s\n", strerror(errno)), 3);
 	if (chdir(dir) == -1)
-		return (free(oldpwd), free(pwd),
-			fd_printf(2, "cd: %s: %s\n", dir, strerror(errno)), 1);
+		return (free(oldpwd),
+				fd_printf(2, "cd: %s: %s\n", dir, strerror(errno)), 1);
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (free(oldpwd), ft_perro("cd: setting PWD", strerror(errno)), 3);
 	if (!change_value("OLDPWD", oldpwd, *list))
 		free(oldpwd);
 	if (!change_value("PWD", pwd, *list))
@@ -65,13 +65,13 @@ int	ft_cd(char **argv, t_shell *shell)
 		return (fd_printf(2, "cd: bad argument\n"), 3);
 	++argv;
 	if (!ft_strncmp("--help", *argv, 8))
-		return (fd_printf(2, "cd: no help provided\n"), 2);
+		return (ft_perro("cd: no help provided", NULL), 2);
 	if (!argv[0])
-		return (fd_printf(2, "cd: argument needed"), 2);
+		return (ft_perro("cd: argument needed", NULL), 2);
 	if (argv[0][0] == '-' && argv[0][1])
 		return (fd_printf(2, SHELL ": cd is not accepting options today\n"), 2);
 	if (argv[0] && argv[1])
-		return (fd_printf(2, SHELL ":cd: too many arguments\n"), 1);
+		return (ft_perro(SHELL ":cd: too many arguments", NULL), 1);
 	change_directory(argv[0], &shell->env);
 	return (0);
 }
