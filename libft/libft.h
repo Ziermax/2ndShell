@@ -6,7 +6,7 @@
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*  Updated: 2025/06/19 03:40:37 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 04:59:35 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		ft_split_charlen(char **split);
 int		ft_arraylen(void *array);
 void	*add_dir(void *array, void *dir);
 void	*add_array(void *array, void *to_add);
-void	free_array(void **array);
+void	free_array(void *array);
 char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *));
 char	*no_skip(char *str);
 char	*skip_space(char *str);
