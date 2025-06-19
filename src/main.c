@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/04/29 15:50:48 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/15 16:43:44 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 02:29:24 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	minishell(char *line, t_shell *shell)
 	//t_token		a_ti;
 	//t_command	oritos;
 	//t_execute	no_existe;
-	
 	(void)shell;
 	(void)line;
 	dprintf(2, "Tokenizing (seprar en palabras).\n");
@@ -67,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		line = get_next_line(0);
 		if (!line)
 			continue ;
-		if (!ft_strncmp("exit", line, 4) || !ft_strncmp("adios" , line, 5))
+		if (!ft_strncmp("exit", line, 4) || !ft_strncmp("adios", line, 5))
 			return (free(line), shell.status);
 		dprintf(2, "Line reached is: \n%s\n", line);
 		dprintf(2, "Minishell process:\n\n");

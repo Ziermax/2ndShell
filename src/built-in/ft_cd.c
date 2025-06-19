@@ -48,10 +48,10 @@ int	change_directory(char *dir, t_env **list)
 		return (fd_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
 	if (copy_value("PWD", &pwd, *list) == -1)
 		return (free(oldpwd),
-				fd_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
+			fd_printf(2, "cd: setting PWD: %s\n", strerror(errno)), 3);
 	if (chdir(dir) == -1)
 		return (free(oldpwd), free(pwd),
-				fd_printf(2, "cd: %s: %s\n", dir, strerror(errno)), 1);
+			fd_printf(2, "cd: %s: %s\n", dir, strerror(errno)), 1);
 	if (!change_value("OLDPWD", oldpwd, *list))
 		free(oldpwd);
 	if (!change_value("PWD", pwd, *list))
@@ -65,7 +65,7 @@ int	ft_cd(char **argv, t_shell *shell)
 		return (fd_printf(2, "cd: bad argument\n"), 3);
 	++argv;
 	if (!ft_strncmp("--help", *argv, 8))
-		return (fd_printf(2, "cd: no help provided\n"), 2); 
+		return (fd_printf(2, "cd: no help provided\n"), 2);
 	if (!argv[0])
 		return (fd_printf(2, "cd: argument needed"), 2);
 	if (argv[0][0] == '-' && argv[0][1])

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         :::      ::::::::  */
+/*  ft_export.c                                          :+:      :+:    :+:  */
+/*                                                     +:+ +:+         +:+    */
+/*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
+/*                                                 +#+#+#+#+#+   +#+          */
+/*  Created: 2025/06/19 02:25:36 by mvelazqu            #+#    #+#            */
+/*  Updated: 2025/06/19 02:25:37 by mvelazqu           ###   ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <string.h>
 #include <errno.h>
 #include "../../inc/libft.h"
@@ -49,7 +61,7 @@ static int	get_key_value(char *str, char **key, char **value)
 	if (!*key)
 		return (1);
 	if (equal)
-	{		
+	{
 		*value = ft_strdup(equal + 1);
 		if (!*value)
 			return (free(*key), 1);
@@ -77,7 +89,7 @@ static int	add_export(char *str, t_env **env)
 		aux = add_value(key, value, env);
 	if (!aux)
 		return (free(key), free(value),
-				fd_printf(2, "export: %s\n", strerror(errno)), 3);
+			fd_printf(2, "export: %s\n", strerror(errno)), 3);
 	return (0);
 }
 
@@ -103,11 +115,12 @@ int	ft_export(char **argv, t_shell *shell)
 		return (fd_printf(2, "export: bad argument\n"), 3);
 	++argv;
 	if (!ft_strncmp("--help", *argv, 8))
-		return (fd_printf(2, "export: no help provided\n"), 2); 
+		return (fd_printf(2, "export: no help provided\n"), 2);
 	if (!argv[0])
 		return (print_export(shell->env), 0);
 	if (argv[0][0] == '-' && argv[0][1])
-		return (fd_printf(2, SHELL ": export is not accepting options today\n"), 2);
+		return (fd_printf(2, SHELL ": export is not accepting options today\n"),
+			2);
 	i = 0;
 	f_ret = 0;
 	while (argv[i])

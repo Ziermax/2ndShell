@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                         :::      ::::::::  */
+/*  ft_env.c                                             :+:      :+:    :+:  */
+/*                                                     +:+ +:+         +:+    */
+/*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
+/*                                                 +#+#+#+#+#+   +#+          */
+/*  Created: 2025/06/19 02:24:24 by mvelazqu            #+#    #+#            */
+/*  Updated: 2025/06/19 02:24:26 by mvelazqu           ###   ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/envairoment.h" 
 #include "../../inc/libft.h"
 /*
@@ -47,7 +59,8 @@ int	ft_env(char **argv, t_shell *shell)
 	if (!argv[1])
 		return (print_env_aux(shell->env), 0);
 	if (argv[1][0] == '-')
-		return (fd_printf(2, SHELL ": env is not accepting options today\n"), 125);
+		return (fd_printf(2, SHELL ": env is not accepting options today\n"),
+			125);
 	fd_printf(2, "env: '%s': We are not launching another program pal\n");
 	return (127);
 }

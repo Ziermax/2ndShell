@@ -28,9 +28,10 @@ int	ft_unset(char **argv, t_shell *shell)
 		return (fd_printf(2, "unset: bad argument\n"), 3);
 	++argv;
 	if (!ft_strncmp("--help", *argv, 8))
-		return (fd_printf(2, "unset: no help provided\n"), 2); 
+		return (fd_printf(2, "unset: no help provided\n"), 2);
 	if (argv[0] && argv[0][0] == '-' && argv[0][1])
-		return (fd_printf(2, SHELL ": unset is not accepting options today\n"), 2);
+		return (fd_printf(2, SHELL ": unset is not accepting options today\n"),
+			2);
 	i = 0;
 	while (argv[i])
 		erase_key(argv[i++], &shell->env);
