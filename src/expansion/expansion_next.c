@@ -6,11 +6,11 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:44:55 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 04:48:52 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 10:38:17 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../../inc/libft.h"
 
 static int	is_varchar(int c)
 {

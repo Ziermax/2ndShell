@@ -6,13 +6,13 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:45:04 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 05:07:33 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 10:38:09 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
-#include "../inc/envairoment.h"
-#include "../inc/expansion.h"
+#include "../../inc/libft.h"
+#include "../../inc/envairoment.h"
+#include "../../inc/expansion.h"
 
 static char	*expand_var(char *str, t_shell *shell)
 {
@@ -131,4 +131,25 @@ char	**expand_str(char *str, t_shell *shell)
 		++i;
 	}
 	return (free_array(split_quote), expansion);
+}
+
+char	**expand_array(char **array, t_shell *shell)
+{
+	char	**expansion;
+	char	**aux;
+	int		i;
+
+	expansion = NULL;
+	i = 0;
+	while (array[i])
+	{
+		aux = expand_str(array[i], shell);
+		if (!aux)
+			return (free_array(expansion), NULL);
+		expansion = add_array(expansion, aux);
+		if (!expansion)
+			return (free_array(aux), NULL);
+		++i;
+	}
+	return (expansion);
 }
