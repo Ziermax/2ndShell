@@ -6,11 +6,28 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.com>  +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/18 23:10:53 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/18 23:11:53 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 15:07:11 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
+int	lst_size(void *list)
+{
+	void	**aux;
+	int		len;
+
+	if (!list)
+		return (0);
+	aux = list;
+	len = 0;
+	while (*aux)
+	{
+		aux = *aux;
+		++len;
+	}
+	return (len);
+}
 
 void	lst_add_back(void *list, void *node)
 {

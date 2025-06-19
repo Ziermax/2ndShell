@@ -10,5 +10,7 @@ int		copy_value(char *key, char **value_box, t_env *env);
 t_env	*change_value(char *key, char *value, t_env *env);
 t_env	*add_value(char *key, char *value, t_env **list);
 t_env	*expand_value(char *key, char *append, t_env **list);
+t_env	*create_list(char **envp);
+char	**create_env(t_env *env);
 
 #endif

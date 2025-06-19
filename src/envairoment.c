@@ -2,19 +2,26 @@
 #include "../inc/struct.h"
 #include "../inc/libft.h"
 
-void	print_env(t_env *env)
+void	print_env(void *env)
 {
+	t_env	*aux;
+
 	if (!env)
 		return ;
-	ft_printf("2, %s: %s\n", env->key, env->value);
+	aux = env;
+	fd_printf(1, "I'm: %p\n | key:%s\n | value:%s\n | next: %p\n",
+			aux, aux->key, aux->value, aux->next);
 }
 
-void	delete_env(t_env *env)
+void	delete_env(void *env)
 {
+	t_env	*aux;
+
 	if (!env)
 		return ;
-	free(env->key);
-	free(env->value);
+	aux = env;
+	free(aux->key);
+	free(aux->value);
 }
 
 t_env	*find_key(char *key, t_env *env)
@@ -118,9 +125,12 @@ t_env	*add_value(char *key, char *value, t_env **list)
 	aux = *list;
 	if (!aux)
 		return (*list = tmp);
+	print_env(aux);
 	while (aux->next)
 		aux = aux->next;
 	aux->next = tmp;
+	print_env(aux);
+	print_env(tmp);
 	return (tmp);
 }
 
@@ -142,4 +152,48 @@ t_env	*expand_value(char *key, char *append, t_env **list)
 	free(key);
 	aux->value = tmp;
 	return (aux);
+}
+
+t_env	*create_list(char **envp)
+{
+	t_env	*env;
+	char	*key;
+	char	*value;
+	int		i;
+	t_env	*aux;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_split_in_two(envp[i], '=', &key, &value) == -1)
+			return (lst_clear(&env, delete_env), NULL);
+		if ((aux = add_value(key, value, &env)) == NULL)
+			return (free(key), free(value), lst_clear(&env, delete_env), NULL);
+		print_env(aux);
+		++i;
+	}
+	return (env);
+}
+
+char	**create_env(t_env *env)
+{
+	char	**envp;
+	int		len;
+	int		i;
+
+	len = lst_size(env);
+	envp = malloc(sizeof(char *) * (len + 1));
+	if (!envp)
+		return (NULL);
+	i = 0;
+	while (i < len && env)
+	{
+		envp[i] = ft_threejoin(env->key, "=", env->value);
+		if (!envp[i])
+			return (free_array(envp), NULL);
+		env = env->next;
+		++i;
+	}
+	envp[i] = NULL;
+	return (envp);
 }

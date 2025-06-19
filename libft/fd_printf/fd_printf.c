@@ -6,7 +6,7 @@
 /*   By: adrmarqu <adrmarqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:28:25 by adrmarqu          #+#    #+#             */
-/*  Updated: 2025/06/18 23:47:47 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 11:44:23 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ int	fd_printf(int fd, char const *s, ...)
 	if (flag.error)
 		return (-1);
 	return (flag.length);
+}
+
+void	ft_perro(char *str, char *error)
+{
+	if (error)
+		fd_printf(2, "%s: %s\n", str);
+	else
+		fd_printf(2, "%s\n", str);
 }

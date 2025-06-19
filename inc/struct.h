@@ -7,9 +7,9 @@ typedef struct s_env	t_env;
 
 struct s_env
 {
+	t_env	*next;
 	char	*key;
 	char	*value;
-	t_env	*next;
 };
 
 typedef struct s_shell
@@ -24,31 +24,31 @@ typedef struct s_token	t_token;
 
 struct s_token
 {
+	t_token	*next;
 	char	*word;
 	int		type;
-	t_token	*next;
 };
 
 typedef struct s_file	t_file;
 
 struct s_file
 {
+	t_file	*next;
 	char	*file_name;
 	int		type;
-	t_file	*next;
 };
 
 typedef struct s_cmd	t_cmd;
 
 struct s_cmd
 {
+	t_cmd	*next;
 	char	*path;
 	char	**argv;
 	t_file	*files;
-	t_cmd	*next;
 };
 
-void	delete_env(t_env *env);
-void	print_env(t_env *env);
+void	delete_env(void *env);
+void	print_env(void *env);
 
 #endif

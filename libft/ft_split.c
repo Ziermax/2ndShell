@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*  ft_split.c                                           :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gergarci <gergarci@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:58:50 by gergarci          #+#    #+#             */
-/*   Updated: 2024/01/26 20:23:51 by gergarci         ###   ########.fr       */
+/*  Updated: 2025/06/19 15:07:21 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,29 @@ char	**ft_split(char const *s, char c)
 		i_words++;
 	}
 	return (array);
+}
+
+int	ft_split_in_two(char *str, char lim, char **str1, char **str2)
+{
+	int	i;
+
+	if (!str || !str1 || !str2)
+		return (-1);
+	*str1 = NULL;
+	*str2 = NULL;
+	i = 0;
+	while (str[i] && str[i] != lim)
+		++i;
+	*str1 = ft_substr(str, START, i);
+	if (!*str1)
+		return (-1);
+	if (str[i])
+	{
+		*str2 = ft_substr(str, i + 1, END);
+		if (!*str2)
+			return (free(*str1), (void)(*str1 = NULL), -1);
+	}
+	return (0);
 }
 
 /*int	main(void)

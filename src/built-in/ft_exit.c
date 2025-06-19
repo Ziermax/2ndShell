@@ -6,7 +6,7 @@
 /*  By: mvelazqu <mvelazqu@student.42barcelona.c     +#+  +:+       +#+       */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*  Created: 2025/06/19 02:24:17 by mvelazqu            #+#    #+#            */
-/*  Updated: 2025/06/19 02:27:00 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 12:32:59 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ int	ft_exit(char **argv, t_shell *shell)
 {
 	int	status;
 
-	if (!argv || !*argv)
+	if (!argv)
 		return (fd_printf(2, "exit: bad argument\n"), 3);
-	++argv;
 	shell->finished = 1;
 	fd_printf(2, "exit\n");
+	if (argv == (void *)1)
+		return (shell->status);
+	if (*argv)
+		++argv;
 	if (!*argv)
 		return (shell->status);
 	status = exit_number(argv[0]);

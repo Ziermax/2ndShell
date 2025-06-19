@@ -6,7 +6,7 @@
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*  Updated: 2025/06/19 10:39:49 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 11:52:46 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,19 @@ int		ft_print_ptr(unsigned long num_in, int *ch_print);
 
 //Extras Maxi
 int		fd_printf(int fd, const char *str, ...);
+void	ft_perro(char *str, char *error);
 	//joins
 char	*ft_threejoin(char *str1, char *str2, char *str3);
 char	*ft_splitjoin(char	**split);
 char	*ft_multiplejoin(int num, ...);
 	//List needs that 'next' var is the first element of struct
+int		lst_size(void *list);
 void	lst_add_back(void *list, void *node);
 void	lst_add_front(void *list, void *node);
 void	lst_clear(void *list, void (*del)(void *));
 void	lst_for_each(void *list, void (*func)(void *));
 	//array
+int		ft_split_in_two(char *str, char lim, char **str1, char **str2);
 int		ft_split_charlen(char **split);
 int		ft_arraylen(void *array);
 void	*add_dir(void *array, void *dir);

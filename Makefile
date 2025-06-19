@@ -18,7 +18,8 @@ SRCS	+= src/envairoment.c src/ft_builtins.c \
 		   src/built-in/ft_cd.c src/built-in/ft_export.c \
 		   src/built-in/ft_echo.c src/built-in/ft_pwd.c \
 		   src/built-in/ft_env.c src/built-in/ft_unset.c \
-		   src/built-in/ft_exit.c
+		   src/built-in/ft_exit.c \
+		   src/init.c src/check_line.c
 
 HEAD	= include/pipex.h
 

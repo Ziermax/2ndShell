@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_cpy+gnrte.c                                 :+:      :+:    :+:   */
+/*  ft_str_cpy+gnrte.c                                   :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gergarci <gergarci@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:58:50 by gergarci          #+#    #+#             */
-/*   Updated: 2024/01/26 20:23:51 by gergarci         ###   ########.fr       */
+/*  Updated: 2025/06/19 15:07:06 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,39 @@ char	*ft_strdup(const char *s1)
 	return (s1dup);
 }
 
+static char	*ft_sub_malloc(size_t start, size_t *len, size_t s_len)
+{
+	char	*substr;
+
+	if (s_len - start <= *len)
+		*len = s_len - start;
+	substr = malloc(sizeof(char) * (*len + 1));
+	if (!substr)
+		return (NULL);
+	substr[*len] = '\0';
+	return (substr);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	int		s_len;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	s_len = ft_strlen(s);
+	if (len == 0 || start >= (unsigned int)s_len)
+		return (ft_calloc(sizeof(char), 1));
+	substr = ft_sub_malloc(start, &len, s_len);
+	if (!substr)
+		return (NULL);
+	while (s[start] && i < len)
+		substr[i++] = s[start++];
+	return (substr);
+}
+/*
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
@@ -104,4 +137,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_calloc(1, sizeof(char)));
 	substr[i] = '\0';
 	return (substr);
-}
+}*/
