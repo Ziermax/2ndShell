@@ -65,18 +65,25 @@ char	*ft_splitjoin(char	**split)
 	int		len;
 	int		i;
 	int		j;
+	int		k;
 
 	if (!split)
 		return (NULL);
-	len = ft_arraylen(split);
+	len = ft_split_charlen(split);
 	join = malloc(sizeof(char *) * (len + 1));
 	if (!join)
 		return (NULL);
-	join[0] = '\0';
 	i = 0;
 	j = 0;
-	while (split[i])
-		j = ft_strfcat(join, split[i++], len + 1, j);
+	while (split[i] && j < len)
+	{
+		k = 0;
+		while (split[i][k] && j < len)
+			join[j++] = split[i][k++];
+		++i;
+	}
+	join[len] = '\0';
+	join[j] = '\0';
 	return (join);
 }
 
@@ -103,14 +110,31 @@ char	*ft_multiplejoin(int num, ...)
 	return (join);
 }
 
-int	ft_strfcat(char	*dst, char *src, int dstsize, int from)
+int	ft_split_charlen(char **split)
 {
-	if (!dst || !src || !dstsize || from < 0)
-		return (dstsize);
-	if (from >= dstsize)
-		return (dstsize);
-	while (*src && from < dstsize)
-		dst[from++] = *(src++);
-	dst[from] = '\0';
-	return (ft_strlen(src) + from);
+	int	len;
+	int	i;
+
+	i = 0;
+	len = 0;
+	while (split[i])
+		len += ft_strlen(split[i++]);
+	return (len);
 }
+
+/*
+#include <stdio.h>
+int	main(int argc, char **argv, char **envp)
+{
+	//char	split[4][] = {"Hola ", "Mundo ", "Tierra", NULL};
+	char	*str;
+
+	(void)argc;
+	(void)envp;
+	//str = ft_splitjoin(split);
+	str = ft_splitjoin(argv);
+	if (!str)
+		return (perror("Split"), 1);
+	printf("Split res: \"%s\"\n", str);
+	free(str);
+}*/
