@@ -6,7 +6,7 @@
 /*   By: gergarci <gergarci@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:21 by gergarci          #+#    #+#             */
-/*  Updated: 2025/06/19 02:59:05 by mvelazqu           ###   ########.fr      */
+/*  Updated: 2025/06/19 10:39:49 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-int		ft_strfcat(char	*dst, char *src, int dstsize, int from);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -109,10 +108,11 @@ void	lst_add_front(void *list, void *node);
 void	lst_clear(void *list, void (*del)(void *));
 void	lst_for_each(void *list, void (*func)(void *));
 	//array
+int		ft_split_charlen(char **split);
 int		ft_arraylen(void *array);
 void	*add_dir(void *array, void *dir);
 void	*add_array(void *array, void *to_add);
-void	free_array(void **array);
+void	free_array(void *array);
 char	**ultra_split(char *str, char *(*skip)(char *), char *(*next)(char *));
 char	*no_skip(char *str);
 char	*skip_space(char *str);
