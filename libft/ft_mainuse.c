@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mainuse.c                                       :+:      :+:    :+:   */
+/*  ft_mainuse.c                                         :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gergarci <gergarci@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:58:50 by gergarci          #+#    #+#             */
-/*   Updated: 2024/01/26 20:23:51 by gergarci         ###   ########.fr       */
+/*  Updated: 2025/06/18 23:51:29 by mvelazqu           ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+/*char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -42,7 +42,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[++j])
 		s3[i + j] = s2[j];
 	return (s3);
-}
+}*/
 
 //Or as:
 	//ft_memcpy(s3, s1, s1len + 1);

@@ -1,9 +1,16 @@
-NAME		= libft.a
+NAME	= libft.a
 
-SRCS		= ft_isx.c ft_itoas+trim.c ft_lst_add+new.c ft_lst_del+map.c \
-				ft_lst_iterators.c ft_mainuse.c ft_memm.c ft_putx.c ft_split.c \
-				ft_str_cpy+gnrte.c ft_str_finder+comp.c ft_strextras.c get_next_line.c ft_printf.c\
-				./printsrc/ft_print_hexnpnt.c ./printsrc/ft_print_num.c ./printsrc/ft_print_strch.c
+SRCS	= ft_isx.c ft_itoas+trim.c ft_lst_add+new.c ft_lst_del+map.c \
+		  ft_lst_iterators.c ft_mainuse.c ft_memm.c ft_putx.c ft_split.c \
+		  ft_str_cpy+gnrte.c ft_str_finder+comp.c ft_strextras.c \
+		  get_next_line.c \
+		  ft_printf.c ./printsrc/ft_print_hexnpnt.c \
+		  ./printsrc/ft_print_num.c ./printsrc/ft_print_strch.c \
+  		  list.c array.c split.c join.c
+SRCS	+= fd_printf/fd_printf.c fd_printf/flags.c \
+		   fd_printf/ft_num.c fd_printf/init_flags.c \
+		   fd_printf/put_flags.c fd_printf/put_number.c \
+		   fd_printf/putchar.c
 				 
 #SRC_PRINT_DIR 	= ./printsrc/
 
